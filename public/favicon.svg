@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#B600A8"/>
+      <stop offset="50%"  stop-color="#7621B0"/>
+      <stop offset="100%" stop-color="#BE4C00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark rounded background -->
+  <rect width="64" height="64" rx="14" fill="#0C0C0C"/>
+
+  <!-- Gradient border ring -->
+  <rect x="1.5" y="1.5" width="61" height="61" rx="13" stroke="url(#g)" stroke-width="2" fill="none" opacity="0.6"/>
+
+  <!-- Letter S -->
+  <text
+    x="32"
+    y="46"
+    text-anchor="middle"
+    font-family="Georgia, serif"
+    font-weight="900"
+    font-size="40"
+    fill="url(#g)"
+  >S</text>
+</svg>
