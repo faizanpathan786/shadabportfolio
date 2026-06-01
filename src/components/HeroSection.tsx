@@ -43,7 +43,7 @@ export default function HeroSection() {
         <FadeIn
           delay={0.6}
           y={30}
-          className="flex-1 flex items-end justify-center relative"
+          className="flex-1 flex items-end justify-center relative translate-x-[8%]"
         >
           <div
             className="relative z-10 mx-auto
