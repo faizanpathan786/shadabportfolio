@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
       '/images/ferrao-1.jpg',
       '/images/ferrao-6.jpg',
     ],
-    col2Image: '/images/ferrao-website-preview.png',
+    col2Image: '/images/ferrao-2.jpg',
   },
   {
     number: '03',
@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
       '/images/ferrao-3.jpg',
       '/images/ferrao-5.jpg',
     ],
-    col2Image: '/images/ferrao-website-preview.png',
+    col2Image: '/images/ferrao-4.jpg',
   },
 ]
 
