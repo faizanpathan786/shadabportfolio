@@ -66,7 +66,7 @@ export default function HeroSection() {
           </div>
 
           {/* Tablet / Desktop: pushed to the right */}
-          <div className="hidden sm:block absolute bottom-0 right-[-4%] md:right-[-2%] lg:right-[2%] z-10
+          <div className="hidden sm:block absolute bottom-[-80px] md:bottom-[-100px] right-[8%] md:right-[10%] lg:right-[14%] z-10
             w-[320px] md:w-[400px] lg:w-[460px] xl:w-[520px]">
             <Magnet strength={3} activeTransition="transform 0.3s ease-out" inactiveTransition="transform 0.6s ease-in-out">
               <div className="relative">

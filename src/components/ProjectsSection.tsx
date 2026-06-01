@@ -61,33 +61,35 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <div
       ref={ref}
-      className="sticky"
-      style={{ top: `${72 + index * 20}px` }}
+      className="h-[72vh] sm:h-[80vh] md:h-[85vh] sticky"
+      style={{ top: `${60 + index * 18}px` }}
     >
       <motion.div
         style={{ scale }}
-        className="rounded-[28px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px]
+        className="h-full rounded-[24px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px]
           border-2 border-[#D7E2EA] bg-[#0C0C0C]
           p-3 sm:p-5 md:p-7 lg:p-8
           flex flex-col gap-3 sm:gap-4 md:gap-5"
       >
         {/* Top row */}
-        <div className="flex items-center justify-between gap-2 sm:gap-4">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 flex-shrink-0">
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6 min-w-0">
             <span
               className="font-black text-[#D7E2EA] leading-none flex-shrink-0"
-              style={{ fontSize: 'clamp(1.8rem, 6vw, 120px)' }}
+              style={{ fontSize: 'clamp(1.6rem, 5vw, 120px)' }}
             >
               {project.number}
             </span>
             <div className="flex flex-col min-w-0">
-              <span className="text-[#D7E2EA] font-light uppercase tracking-widest opacity-60"
-                style={{ fontSize: 'clamp(0.55rem, 1.2vw, 0.875rem)' }}>
+              <span
+                className="text-[#D7E2EA] font-light uppercase tracking-widest opacity-60"
+                style={{ fontSize: 'clamp(0.5rem, 1.2vw, 0.875rem)' }}
+              >
                 {project.category}
               </span>
               <span
                 className="text-[#D7E2EA] font-black uppercase leading-tight truncate"
-                style={{ fontSize: 'clamp(0.85rem, 2.5vw, 2.5rem)' }}
+                style={{ fontSize: 'clamp(0.8rem, 2.5vw, 2.5rem)' }}
               >
                 {project.name}
               </span>
@@ -98,35 +100,31 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <LiveProjectButton href={project.href} />
             </div>
           )}
-        </div>
-
-        {/* Mobile visit button */}
-        {project.href && (
-          <div className="sm:hidden">
+          {project.href && (
             <a
               href={project.href}
               target="_blank"
               rel="noreferrer"
-              className="inline-block rounded-full border border-[#D7E2EA]/50 text-[#D7E2EA]
-                font-medium uppercase tracking-widest text-xs px-4 py-2"
+              className="flex-shrink-0 sm:hidden rounded-full border border-[#D7E2EA]/50
+                text-[#D7E2EA] font-medium uppercase tracking-widest text-[10px] px-3 py-1.5"
             >
-              Visit Site
+              Visit
             </a>
-          </div>
-        )}
+          )}
+        </div>
 
-        {/* Image grid — stacked on mobile, side-by-side on md+ */}
-        <div className="flex flex-col md:flex-row gap-2 sm:gap-3 md:gap-4">
+        {/* Image area — fills remaining height */}
+        <div className="flex gap-2 sm:gap-3 md:gap-4 flex-1 min-h-0">
 
-          {/* Left column — hidden on mobile, visible md+ */}
+          {/* Left column — hidden on mobile */}
           <div className="hidden md:flex flex-col gap-3 lg:gap-4" style={{ flex: '0 0 40%' }}>
             <div
-              className="relative rounded-[28px] lg:rounded-[40px] overflow-hidden"
-              style={{ height: 'clamp(100px, 14vw, 230px)' }}
+              className="relative rounded-[28px] lg:rounded-[40px] overflow-hidden flex-shrink-0"
+              style={{ height: 'clamp(100px, 13vw, 220px)' }}
             >
               <img
                 src={project.col1Images[0]}
-                alt={`${project.name} preview 1`}
+                alt={`${project.name} 1`}
                 className="w-full h-full object-cover object-top"
                 onError={(e) => { (e.target as HTMLImageElement).src = '/images/ferrao-3.jpg' }}
               />
@@ -135,13 +133,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               </div>
             </div>
 
-            <div
-              className="relative rounded-[28px] lg:rounded-[40px] overflow-hidden flex-1"
-              style={{ height: 'clamp(120px, 18vw, 300px)' }}
-            >
+            <div className="relative rounded-[28px] lg:rounded-[40px] overflow-hidden flex-1 min-h-0">
               <img
                 src={project.col1Images[1]}
-                alt={`${project.name} preview 2`}
+                alt={`${project.name} 2`}
                 className="w-full h-full object-cover object-top"
                 onError={(e) => { (e.target as HTMLImageElement).src = '/images/ferrao-3.jpg' }}
               />
@@ -151,12 +146,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </div>
           </div>
 
-          {/* Right column — full width on mobile, 60% on md+ */}
-          <div className="flex-1 md:flex-none" style={{ flex: undefined }}>
-            <div
-              className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] overflow-hidden w-full"
-              style={{ height: 'clamp(200px, 45vw, 520px)' }}
-            >
+          {/* Right / main image — full width on mobile */}
+          <div className="flex-1 min-h-0">
+            <div className="relative h-full rounded-[20px] sm:rounded-[32px] lg:rounded-[40px] overflow-hidden">
               <img
                 src={project.col2Image}
                 alt={`${project.name} main`}
@@ -173,7 +165,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     bg-black/40 hover:bg-black/55 transition-colors duration-200 group"
                 >
                   <div className="text-center px-4">
-                    <div className="text-white font-semibold text-base sm:text-lg md:text-xl mb-2 sm:mb-3">
+                    <div className="text-white font-semibold text-sm sm:text-lg md:text-xl mb-2">
                       {project.name}
                     </div>
                     <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2
@@ -188,15 +180,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
               {!project.href && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                  <div className="text-white font-semibold text-base sm:text-xl">{project.name}</div>
+                  <div className="text-white font-semibold text-sm sm:text-xl">{project.name}</div>
                 </div>
               )}
 
-              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1 rounded-full shadow">
+              <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/90 text-xs sm:text-sm px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow">
                 {project.number}
               </div>
             </div>
           </div>
+
         </div>
       </motion.div>
     </div>
@@ -219,7 +212,7 @@ export default function ProjectsSection() {
         Projects
       </h2>
 
-      <div className="relative flex flex-col gap-4 sm:gap-0">
+      <div className="relative">
         {PROJECTS.map((project, i) => (
           <ProjectCard key={project.number} project={project} index={i} />
         ))}
