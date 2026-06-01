@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
     category: 'Portugal · Boat Charters',
     href: 'https://www.caisdoferrao.com/',
     col1Images: [
-      '/images/thum-ferrao.jpg',
+      '/images/ferrao-1.jpg',
       '/images/ferrao-6.jpg',
     ],
     col2Image: '/images/ferrao-website-preview.png',
