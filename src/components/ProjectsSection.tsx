@@ -125,17 +125,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 src={project.col2Image}
                 alt={`${project.name} main preview`}
                 className="w-full h-full object-cover object-top"
-                onError={(e) => { (e.target as HTMLImageElement).src = '/images/thum-viator.jpg' }}
+                onError={(e) => { (e.target as HTMLImageElement).src = '/images/ferrao-3.jpg' }}
               />
 
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-                <div className="text-center">
+              {project.href && (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 hover:bg-black/55 transition-colors duration-200 group"
+                >
+                  <div className="text-center">
+                    <div className="text-white font-semibold text-lg sm:text-xl mb-3">{project.name}</div>
+                    <span className="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white rounded-md text-sm uppercase tracking-wider group-hover:bg-white/20 transition-colors duration-200">
+                      Visit Site
+                    </span>
+                  </div>
+                </a>
+              )}
+              {!project.href && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                   <div className="text-white font-semibold text-lg sm:text-xl">{project.name}</div>
-                  {project.href && (
-                    <a href={project.href} target="_blank" rel="noreferrer" className="mt-3 inline-block px-4 py-2 bg-white/10 border border-white/30 text-white rounded-md text-sm uppercase tracking-wider">Open</a>
-                  )}
                 </div>
-              </div>
+              )}
               <div className="absolute top-4 right-4 bg-white/90 text-sm px-3 py-1 rounded-full shadow">{project.number}</div>
             </div>
           </div>
