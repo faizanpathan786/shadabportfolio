@@ -61,69 +61,105 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <div
       ref={ref}
-      className="h-[85vh] sticky"
-      style={{ top: `${96 + index * 28}px` }}
+      className="sticky"
+      style={{ top: `${72 + index * 20}px` }}
     >
       <motion.div
         style={{ scale }}
-        className="h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px]
+        className="rounded-[28px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px]
           border-2 border-[#D7E2EA] bg-[#0C0C0C]
-          p-4 sm:p-6 md:p-8 flex flex-col gap-4 md:gap-6"
+          p-3 sm:p-5 md:p-7 lg:p-8
+          flex flex-col gap-3 sm:gap-4 md:gap-5"
       >
         {/* Top row */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 md:gap-6 min-w-0">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 min-w-0">
             <span
               className="font-black text-[#D7E2EA] leading-none flex-shrink-0"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 120px)' }}
+              style={{ fontSize: 'clamp(1.8rem, 6vw, 120px)' }}
             >
               {project.number}
             </span>
             <div className="flex flex-col min-w-0">
-              <span className="text-[#D7E2EA] font-light uppercase tracking-widest text-xs sm:text-sm opacity-60">
+              <span className="text-[#D7E2EA] font-light uppercase tracking-widest opacity-60"
+                style={{ fontSize: 'clamp(0.55rem, 1.2vw, 0.875rem)' }}>
                 {project.category}
               </span>
               <span
                 className="text-[#D7E2EA] font-black uppercase leading-tight truncate"
-                style={{ fontSize: 'clamp(1rem, 3vw, 2.5rem)' }}
+                style={{ fontSize: 'clamp(0.85rem, 2.5vw, 2.5rem)' }}
               >
                 {project.name}
               </span>
             </div>
           </div>
-          {project.href && <LiveProjectButton href={project.href} />}
+          {project.href && (
+            <div className="flex-shrink-0 hidden sm:block">
+              <LiveProjectButton href={project.href} />
+            </div>
+          )}
         </div>
 
-        {/* Image grid */}
-        <div className="flex gap-3 md:gap-4 flex-1 min-h-0">
-          {/* Left column — 40% */}
-          <div className="flex flex-col gap-3 md:gap-4" style={{ flex: '0 0 40%' }}>
-            <div className="relative rounded-[40px] sm:rounded-[50px] md:rounded-[60px] overflow-hidden" style={{ height: 'clamp(130px, 16vw, 230px)' }}>
-                <img
-                  src={project.col1Images[0]}
-                  alt={`${project.name} preview 1`}
-                  className="w-full h-full object-cover object-top"
-                  onError={(e) => { (e.target as HTMLImageElement).src = '/images/thum-viator.jpg' }}
-                />
-              <div className="absolute left-3 bottom-3 bg-black/50 text-white text-xs px-2 py-1 rounded-md">{project.name}</div>
+        {/* Mobile visit button */}
+        {project.href && (
+          <div className="sm:hidden">
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block rounded-full border border-[#D7E2EA]/50 text-[#D7E2EA]
+                font-medium uppercase tracking-widest text-xs px-4 py-2"
+            >
+              Visit Site
+            </a>
+          </div>
+        )}
+
+        {/* Image grid — stacked on mobile, side-by-side on md+ */}
+        <div className="flex flex-col md:flex-row gap-2 sm:gap-3 md:gap-4">
+
+          {/* Left column — hidden on mobile, visible md+ */}
+          <div className="hidden md:flex flex-col gap-3 lg:gap-4" style={{ flex: '0 0 40%' }}>
+            <div
+              className="relative rounded-[28px] lg:rounded-[40px] overflow-hidden"
+              style={{ height: 'clamp(100px, 14vw, 230px)' }}
+            >
+              <img
+                src={project.col1Images[0]}
+                alt={`${project.name} preview 1`}
+                className="w-full h-full object-cover object-top"
+                onError={(e) => { (e.target as HTMLImageElement).src = '/images/ferrao-3.jpg' }}
+              />
+              <div className="absolute left-3 bottom-3 bg-black/50 text-white text-xs px-2 py-1 rounded-md">
+                {project.name}
+              </div>
             </div>
 
-            <div className="relative rounded-[40px] sm:rounded-[50px] md:rounded-[60px] overflow-hidden flex-1 min-h-0" style={{ height: 'clamp(160px, 22vw, 340px)' }}>
+            <div
+              className="relative rounded-[28px] lg:rounded-[40px] overflow-hidden flex-1"
+              style={{ height: 'clamp(120px, 18vw, 300px)' }}
+            >
               <img
                 src={project.col1Images[1]}
                 alt={`${project.name} preview 2`}
                 className="w-full h-full object-cover object-top"
-                onError={(e) => { (e.target as HTMLImageElement).src = '/images/thum-viator.jpg' }}
+                onError={(e) => { (e.target as HTMLImageElement).src = '/images/ferrao-3.jpg' }}
               />
-              <div className="absolute left-3 bottom-3 bg-black/50 text-white text-xs px-2 py-1 rounded-md">{project.category}</div>
+              <div className="absolute left-3 bottom-3 bg-black/50 text-white text-xs px-2 py-1 rounded-md">
+                {project.category}
+              </div>
             </div>
           </div>
-          {/* Right column — 60% */}
-          <div style={{ flex: '0 0 60%' }}>
-            <div className="relative h-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] overflow-hidden">
+
+          {/* Right column — full width on mobile, 60% on md+ */}
+          <div className="flex-1 md:flex-none" style={{ flex: undefined }}>
+            <div
+              className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] overflow-hidden w-full"
+              style={{ height: 'clamp(200px, 45vw, 520px)' }}
+            >
               <img
                 src={project.col2Image}
-                alt={`${project.name} main preview`}
+                alt={`${project.name} main`}
                 className="w-full h-full object-cover object-top"
                 onError={(e) => { (e.target as HTMLImageElement).src = '/images/ferrao-3.jpg' }}
               />
@@ -133,22 +169,32 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                   href={project.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 hover:bg-black/55 transition-colors duration-200 group"
+                  className="absolute inset-0 flex flex-col items-center justify-center
+                    bg-black/40 hover:bg-black/55 transition-colors duration-200 group"
                 >
-                  <div className="text-center">
-                    <div className="text-white font-semibold text-lg sm:text-xl mb-3">{project.name}</div>
-                    <span className="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white rounded-md text-sm uppercase tracking-wider group-hover:bg-white/20 transition-colors duration-200">
+                  <div className="text-center px-4">
+                    <div className="text-white font-semibold text-base sm:text-lg md:text-xl mb-2 sm:mb-3">
+                      {project.name}
+                    </div>
+                    <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2
+                      bg-white/10 border border-white/30 text-white rounded-md
+                      text-xs sm:text-sm uppercase tracking-wider
+                      group-hover:bg-white/20 transition-colors duration-200">
                       Visit Site
                     </span>
                   </div>
                 </a>
               )}
+
               {!project.href && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                  <div className="text-white font-semibold text-lg sm:text-xl">{project.name}</div>
+                  <div className="text-white font-semibold text-base sm:text-xl">{project.name}</div>
                 </div>
               )}
-              <div className="absolute top-4 right-4 bg-white/90 text-sm px-3 py-1 rounded-full shadow">{project.number}</div>
+
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white/90 text-xs sm:text-sm px-2 py-1 sm:px-3 sm:py-1 rounded-full shadow">
+                {project.number}
+              </div>
             </div>
           </div>
         </div>
@@ -161,19 +207,19 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px]
-        -mt-10 sm:-mt-12 md:-mt-14 relative z-10
-        px-5 sm:px-8 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-20"
+      className="bg-[#0C0C0C] rounded-t-[28px] sm:rounded-t-[40px] md:rounded-t-[50px] lg:rounded-t-[60px]
+        -mt-7 sm:-mt-10 md:-mt-12 lg:-mt-14 relative z-10
+        px-3 sm:px-6 md:px-10 pt-14 sm:pt-20 md:pt-28 lg:pt-32 pb-16 sm:pb-20"
     >
       <h2
         className="hero-heading font-black uppercase text-center leading-none tracking-tight
-          mb-16 sm:mb-20 md:mb-24"
-        style={{ fontSize: 'clamp(2.2rem, 8vw, 110px)' }}
+          mb-10 sm:mb-16 md:mb-20 lg:mb-24"
+        style={{ fontSize: 'clamp(2rem, 8vw, 110px)' }}
       >
-        Project
+        Projects
       </h2>
 
-      <div className="relative">
+      <div className="relative flex flex-col gap-4 sm:gap-0">
         {PROJECTS.map((project, i) => (
           <ProjectCard key={project.number} project={project} index={i} />
         ))}
